@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.experimental.command.Command;
 import edu.wpi.first.wpilibj.experimental.command.CommandScheduler;
-import frc.robot.util.Config;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -32,12 +31,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    Config.cleanAllPreferences();
-    Config.loadConfiguration("/home/lvuser/deploy/config.properties", "/home/lvuser/config.properties",
-            "/u/config.properties");
-    Config.printPreferences(System.out);
-    config = Preferences.getInstance();
-    m_robotContainer = new RobotContainer(config);
+    m_robotContainer = new RobotContainer();
   }
 
   /**

@@ -1,8 +1,9 @@
 package frc.robot;
 
+import static frc.robot.Constants.*;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.XboxController;
@@ -41,16 +42,16 @@ public class RobotContainer {
   // The driver's controller
   private final XboxController xboxController = new XboxController(0);
 
-  public RobotContainer(Preferences config) {
+  public RobotContainer() {
 
       // Create low level components
-      leftFrontMotor = new WPI_TalonSRX(config.getInt("chassis.leftFront.canID", 2));
-      leftRearMotor = new WPI_TalonSRX(config.getInt("chassis.leftRear.canID", 3));
-      rightFrontMotor = new WPI_TalonSRX(config.getInt("chassis.rightFront.canID", 4));
-      rightRearMotor = new WPI_TalonSRX(config.getInt("chassis.rightRear.canID", 5));
+      leftFrontMotor = new WPI_TalonSRX(CHASSIS_LEFTFRONT_CANID);
+      leftRearMotor = new WPI_TalonSRX(CHASSIS_LEFTREAR_CANID);
+      rightFrontMotor = new WPI_TalonSRX(CHASSIS_RIGHTFRONT_CANID);
+      rightRearMotor = new WPI_TalonSRX(CHASSIS_RIGHTREAR_CANID);
 
-      shooterMotor = new WPI_TalonSRX(config.getInt("shooter.motor.canID", 16));
-      shooterServo = new Servo(config.getInt("shooter.servo.dio", 0));
+      shooterMotor = new WPI_TalonSRX(SHOOTER_MOTOR_CANID);
+      shooterServo = new Servo(SHOOTER_SERVO_DIO);
 
       // Create subsystems
       chassis = new ChassisSubsystem(leftFrontMotor, leftRearMotor, rightFrontMotor, rightRearMotor);

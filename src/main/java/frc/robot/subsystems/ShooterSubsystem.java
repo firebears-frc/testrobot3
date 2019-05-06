@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Preferences;
+import static frc.robot.Constants.*;
+
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.experimental.command.SendableSubsystemBase;
@@ -10,16 +11,14 @@ import edu.wpi.first.wpilibj.experimental.command.SendableSubsystemBase;
  */
 public class ShooterSubsystem extends SendableSubsystemBase {
 
-  private final Preferences config = Preferences.getInstance();
-  private final double SERVO_MIN = config.getDouble("shooter.servo_min", 0.0);
-  private final double SERVO_MAX = config.getDouble("shooter.servo_max", 90.0);
-
-  private final SpeedController shooterMotor;
-  private final Servo shooterServo;
+  protected final SpeedController shooterMotor;
+  protected final Servo shooterServo;
+  protected boolean servoRetracted;
 
   public ShooterSubsystem(SpeedController motor, Servo servo) {
     shooterMotor = motor;
     shooterServo = servo;
+    retract();
   }
 
   public void setSpeed(double speed) {
@@ -27,10 +26,25 @@ public class ShooterSubsystem extends SendableSubsystemBase {
   }
 
   public void retract() {
-    shooterServo.set(SERVO_MIN);
+    shooterServo.set(SHOOTER_SERVO_MIN);
+    servoRetracted = true;
   }
 
   public void fire() {
-    shooterServo.set(SERVO_MAX);
+    shooterServo.set(SHOOTER_SERVO_MAX);
+    servoRetracted = false;
+  }
+
+  public void toggle() {
+    if (servoRetracted) {
+      fire();
+    } else {
+      retract();
+    }
+  }
+
+  public void reset() {
+    setSpeed(0.0);
+    retract();
   }
 }
