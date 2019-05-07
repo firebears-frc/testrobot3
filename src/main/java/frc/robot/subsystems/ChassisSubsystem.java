@@ -10,15 +10,15 @@ import edu.wpi.first.wpilibj.experimental.command.SendableSubsystemBase;
  */
 public class ChassisSubsystem extends SendableSubsystemBase {
 
-  private final SpeedControllerGroup m_leftMotors;
-  private final SpeedControllerGroup m_rightMotors;
-  private final DifferentialDrive m_drive;
+  private final SpeedControllerGroup leftMotors;
+  private final SpeedControllerGroup rightMotors;
+  private final DifferentialDrive robotDrive;
 
   public ChassisSubsystem(SpeedController leftFrontMotor, SpeedController leftRearMotor, 
       SpeedController rightFrontMotor, SpeedController rightRearMotor) {
-    m_leftMotors = new SpeedControllerGroup(leftFrontMotor, leftRearMotor);
-    m_rightMotors = new SpeedControllerGroup(rightFrontMotor, rightRearMotor);
-    m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
+    leftMotors = new SpeedControllerGroup(leftFrontMotor, leftRearMotor);
+    rightMotors = new SpeedControllerGroup(rightFrontMotor, rightRearMotor);
+    robotDrive = new DifferentialDrive(leftMotors, rightMotors);
   }
 
   /**
@@ -28,7 +28,7 @@ public class ChassisSubsystem extends SendableSubsystemBase {
    * @param rot the commanded rotation
    */
   public void arcadeDrive(double fwd, double rot) {
-    m_drive.arcadeDrive(fwd, rot);
+    robotDrive.arcadeDrive(fwd, rot);
   }
 
   /**
@@ -38,6 +38,6 @@ public class ChassisSubsystem extends SendableSubsystemBase {
    * @param maxOutput the maximum output to which the drive will be constrained
    */
   public void setMaxOutput(double maxOutput) {
-    m_drive.setMaxOutput(maxOutput);
+    robotDrive.setMaxOutput(maxOutput);
   }
 }

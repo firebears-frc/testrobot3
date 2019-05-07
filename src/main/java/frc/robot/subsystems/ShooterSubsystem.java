@@ -6,9 +6,6 @@ import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.experimental.command.SendableSubsystemBase;
 
-/**
- * Shoots balls.
- */
 public class ShooterSubsystem extends SendableSubsystemBase {
 
   protected final SpeedController shooterMotor;
@@ -21,7 +18,7 @@ public class ShooterSubsystem extends SendableSubsystemBase {
     retract();
   }
 
-  public void setSpeed(double speed) {
+  public void setSpeed(final double speed) {
     shooterMotor.set(speed);
   }
 
