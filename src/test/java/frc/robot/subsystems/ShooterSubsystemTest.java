@@ -46,14 +46,13 @@ public class ShooterSubsystemTest {
         SpeedController motor = mock(SpeedController.class);
         Servo servo = mock(Servo.class);
         ShooterSubsystem shooter = new ShooterSubsystem(motor, servo);
-        verify(servo).set(SHOOTER_SERVO_MIN);
-        
+
         // Act
         shooter.reset();
 
         // Assert
         assertEquals(true, shooter.servoRetracted);
         verify(motor).set(0.0);
-
+        verify(servo, atLeast(2)).set(SHOOTER_SERVO_MIN);
     }
 }
