@@ -29,7 +29,7 @@ public class ShooterSetSpeedCommandTest {
     @Test
     public void testCommand() {
          // Arrange
-         ShooterSetSpeedCommand retractCommand = new ShooterSetSpeedCommand(0.5, shooter) {
+         ShooterSetSpeedCommand command = new ShooterSetSpeedCommand(0.5, shooter) {
             @Override
             public boolean runsWhenDisabled() {
                 return true;
@@ -37,7 +37,7 @@ public class ShooterSetSpeedCommandTest {
         };
 
         // Act
-        scheduler.scheduleCommand(retractCommand, true);
+        scheduler.scheduleCommand(command, true);
         scheduler.run();
 
         // Assert
