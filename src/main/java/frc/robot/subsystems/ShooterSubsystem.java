@@ -10,12 +10,11 @@ public class ShooterSubsystem extends SendableSubsystemBase {
 
   protected final SpeedController shooterMotor;
   protected final Servo shooterServo;
-  protected boolean servoRetracted;
+  protected boolean servoRetracted = true;
 
   public ShooterSubsystem(SpeedController motor, Servo servo) {
     shooterMotor = motor;
     shooterServo = servo;
-    retract();
   }
 
   public void setSpeed(final double speed) {

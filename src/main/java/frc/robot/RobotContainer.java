@@ -4,6 +4,7 @@ import static frc.robot.Constants.*;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.XboxController;
@@ -29,6 +30,8 @@ public class RobotContainer {
   private final SpeedController rightFrontMotor;
   private final SpeedController rightRearMotor;
 
+  private final AnalogGyro gyro;
+
   private final SpeedController shooterMotor;
   private final Servo shooterServo;
 
@@ -49,12 +52,13 @@ public class RobotContainer {
       leftRearMotor = new WPI_TalonSRX(CHASSIS_LEFTREAR_CANID);
       rightFrontMotor = new WPI_TalonSRX(CHASSIS_RIGHTFRONT_CANID);
       rightRearMotor = new WPI_TalonSRX(CHASSIS_RIGHTREAR_CANID);
+      gyro = new AnalogGyro(1);
 
       shooterMotor = new WPI_TalonSRX(SHOOTER_MOTOR_CANID);
       shooterServo = new Servo(SHOOTER_SERVO_DIO);
 
       // Create subsystems
-      chassis = new ChassisSubsystem(leftFrontMotor, leftRearMotor, rightFrontMotor, rightRearMotor);
+      chassis = new ChassisSubsystem(leftFrontMotor, leftRearMotor, rightFrontMotor, rightRearMotor, gyro);
       chassis.setDefaultCommand(new ChassisDriveCommand(xboxController, chassis));
 
       shooter = new ShooterSubsystem(shooterMotor, shooterServo);

@@ -53,6 +53,6 @@ public class ShooterSubsystemTest {
         // Assert
         assertEquals(true, shooter.servoRetracted);
         verify(motor).set(0.0);
-        verify(servo, atLeast(2)).set(SHOOTER_SERVO_MIN);
+        verify(servo).set(SHOOTER_SERVO_MIN);
     }
 }
