@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.experimental.command.SendableSubsystemBase;
 public class ShooterSubsystem extends SendableSubsystemBase {
 
   protected final SpeedController shooterMotor;
-  protected final Servo shooterServo;
-  protected boolean servoRetracted = true;
+  private final Servo shooterServo;
+  private boolean servoRetracted = true;
 
   public ShooterSubsystem(SpeedController motor, Servo servo) {
     shooterMotor = motor;
@@ -42,5 +42,9 @@ public class ShooterSubsystem extends SendableSubsystemBase {
   public void reset() {
     setSpeed(0.0);
     retract();
+  }
+
+  public boolean isServoArmRetracted() {
+    return servoRetracted;
   }
 }

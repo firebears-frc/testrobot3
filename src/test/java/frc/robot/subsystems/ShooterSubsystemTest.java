@@ -21,7 +21,7 @@ public class ShooterSubsystemTest {
         ShooterSubsystem shooter = new ShooterSubsystem(motor, servo);
 
         // Assert
-        assertEquals(true, shooter.servoRetracted);
+        assertEquals(true, shooter.isServoArmRetracted());
     }
 
     @Test
@@ -51,7 +51,7 @@ public class ShooterSubsystemTest {
         shooter.reset();
 
         // Assert
-        assertEquals(true, shooter.servoRetracted);
+        assertEquals(true, shooter.isServoArmRetracted());
         verify(motor).set(0.0);
         verify(servo).set(SHOOTER_SERVO_MIN);
     }
