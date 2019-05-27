@@ -38,6 +38,7 @@ public class ShooterServoArmCommandTest {
 
         // Assert
         verify(shooter).retract();
+        assertEquals(0, scheduler.getScheduleSize());
     }
 
     @Test
@@ -52,5 +53,6 @@ public class ShooterServoArmCommandTest {
 
         // Assert
         verify(shooter).fire();
+        assertEquals(0, scheduler.getScheduleSize());
     }
 }
