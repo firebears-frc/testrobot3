@@ -10,24 +10,21 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class ShooterServoArmCommandTest {
 
     CommandScheduler scheduler = null;
-    ShooterSubsystem shooter = null;
 
     @Before
     public void setup() {
-        shooter = mock(ShooterSubsystem.class);
         scheduler = CommandScheduler.getInstance();
-        scheduler.registerSubsystem(shooter);
     }
 
     @After
     public void cleanup() {
         scheduler.cancelAll();
-        scheduler.unregisterSubsystem(shooter);
     }
 
     @Test
     public void testRetractArm() {
         // Arrange
+        ShooterSubsystem shooter = mock(ShooterSubsystem.class);
         ShooterServoArmCommand retractCommand = new ShooterServoArmCommand(false, shooter) {
             @Override
             public boolean runsWhenDisabled() {
@@ -46,6 +43,7 @@ public class ShooterServoArmCommandTest {
     @Test
     public void testFireArm() {
         // Arrange
+        ShooterSubsystem shooter = mock(ShooterSubsystem.class);
         ShooterServoArmCommand fireCommand = new ShooterServoArmCommand(true, shooter) {
             @Override
             public boolean runsWhenDisabled() {
