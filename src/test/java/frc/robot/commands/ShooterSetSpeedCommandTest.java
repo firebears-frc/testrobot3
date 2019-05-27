@@ -37,7 +37,7 @@ public class ShooterSetSpeedCommandTest {
         };
 
         // Act
-        scheduler.scheduleCommand(command, true);
+        scheduler.schedule(command);
         scheduler.run();
 
         // Assert

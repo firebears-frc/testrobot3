@@ -33,7 +33,7 @@ public class ShooterServoArmCommandTest {
         ShooterServoArmCommand retractCommand = new ShooterServoArmCommand(false, shooter);
 
         // Act
-        scheduler.scheduleCommand(retractCommand, true);
+        scheduler.schedule(retractCommand);
         scheduler.run();
 
         // Assert
@@ -48,7 +48,7 @@ public class ShooterServoArmCommandTest {
         ShooterServoArmCommand fireCommand = new ShooterServoArmCommand(true, shooter);
 
         // Act
-        scheduler.scheduleCommand(fireCommand, true);
+        scheduler.schedule(fireCommand);
         scheduler.run();
 
         // Assert

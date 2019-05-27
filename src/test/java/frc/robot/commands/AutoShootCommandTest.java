@@ -34,7 +34,7 @@ public class AutoShootCommandTest {
         AutoShootCommand command = new AutoShootCommand(shooter);
 
         // Act
-        scheduler.scheduleCommand(command, true);
+        scheduler.schedule(command);
         while (scheduler.getScheduleSize() > 0) {
             scheduler.run();
         }
