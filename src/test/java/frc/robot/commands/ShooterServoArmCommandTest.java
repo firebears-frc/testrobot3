@@ -9,31 +9,28 @@ import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShooterServoArmCommandTest {
 
-    CommandScheduler scheduler = null;
-    ShooterSubsystem shooter = null;
+    private CommandScheduler scheduler = null;
 
     @Before
     public void setup() {
-        shooter = mock(ShooterSubsystem.class);
-        scheduler = CommandScheduler.getInstance();
-        scheduler.registerSubsystem(shooter);
+        scheduler = new CommandScheduler() {
+            @Override
+            protected boolean isRobotDisabled() {
+                return false;
+            }
+        };
     }
 
     @After
     public void cleanup() {
         scheduler.cancelAll();
-        scheduler.unregisterSubsystem(shooter);
     }
 
     @Test
     public void testRetractArm() {
         // Arrange
-        ShooterServoArmCommand retractCommand = new ShooterServoArmCommand(false, shooter) {
-            @Override
-            public boolean runsWhenDisabled() {
-                return true;
-            }
-        };
+        ShooterSubsystem shooter = mock(ShooterSubsystem.class);
+        ShooterServoArmCommand retractCommand = new ShooterServoArmCommand(false, shooter);
 
         // Act
         scheduler.scheduleCommand(retractCommand, true);
@@ -46,12 +43,8 @@ public class ShooterServoArmCommandTest {
     @Test
     public void testFireArm() {
         // Arrange
-        ShooterServoArmCommand fireCommand = new ShooterServoArmCommand(true, shooter) {
-            @Override
-            public boolean runsWhenDisabled() {
-                return true;
-            }
-        };
+        ShooterSubsystem shooter = mock(ShooterSubsystem.class);
+        ShooterServoArmCommand fireCommand = new ShooterServoArmCommand(true, shooter);
 
         // Act
         scheduler.scheduleCommand(fireCommand, true);
