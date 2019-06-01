@@ -5,6 +5,7 @@ import static org.mockito.Mockito.*;
 import org.junit.*;
 
 import edu.wpi.first.wpilibj.experimental.command.CommandScheduler;
+import edu.wpi.first.wpilibj.experimental.RobotState;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShooterServoArmCommandTest {
@@ -13,12 +14,9 @@ public class ShooterServoArmCommandTest {
 
     @Before
     public void setup() {
-        scheduler = new CommandScheduler() {
-            @Override
-            protected boolean isRobotDisabled() {
-                return false;
-            }
-        };
+        RobotState robotState = mock(RobotState.class);
+        when(robotState.isDisabled()).thenReturn(false);
+        scheduler = new CommandScheduler(robotState) {};
     }
 
     @After

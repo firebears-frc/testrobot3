@@ -4,19 +4,21 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import org.junit.*;
 
+import edu.wpi.first.wpilibj.experimental.RobotState;
 import edu.wpi.first.wpilibj.experimental.command.CommandScheduler;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShooterSetSpeedCommandTest {
 
-    
     CommandScheduler scheduler = null;
     ShooterSubsystem shooter = null;
 
     @Before
     public void setup() {
         shooter = mock(ShooterSubsystem.class);
-        scheduler = CommandScheduler.getInstance();
+        RobotState robotState = mock(RobotState.class);
+        when(robotState.isDisabled()).thenReturn(false);
+        scheduler = new CommandScheduler(robotState) {};
         scheduler.registerSubsystem(shooter);
     }
 
@@ -29,12 +31,7 @@ public class ShooterSetSpeedCommandTest {
     @Test
     public void testCommand() {
          // Arrange
-         ShooterSetSpeedCommand command = new ShooterSetSpeedCommand(0.5, shooter) {
-            @Override
-            public boolean runsWhenDisabled() {
-                return true;
-            }
-        };
+         ShooterSetSpeedCommand command = new ShooterSetSpeedCommand(0.5, shooter);
 
         // Act
         scheduler.schedule(command);
