@@ -9,4 +9,8 @@ public class ShooterSetSpeedCommand extends InstantCommand {
     super(() -> { shooter.setSpeed(speed); }, shooter);
   }
 
+  @Override
+  public boolean runsWhenDisabled() {
+    return true;
+  }
 }

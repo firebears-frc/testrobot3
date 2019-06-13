@@ -18,4 +18,9 @@ public class AutoShootCommand extends SequentialCommandGroup {
                 new PrintCommand("END: AutoShootCommand")
         );
     }
+
+    @Override
+    public boolean runsWhenDisabled() {
+        return true;
+    }
 }

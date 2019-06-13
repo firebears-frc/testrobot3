@@ -28,4 +28,8 @@ public class ShooterServoArmCommand extends SendableCommandBase {
     return true;
   }
 
+  @Override
+  public boolean runsWhenDisabled() {
+    return true;
+  }
 }

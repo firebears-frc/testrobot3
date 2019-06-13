@@ -5,7 +5,6 @@ import static org.mockito.Mockito.*;
 
 import org.junit.*;
 
-import edu.wpi.first.wpilibj.experimental.RobotState;
 import edu.wpi.first.wpilibj.experimental.command.CommandScheduler;
 import frc.robot.subsystems.ShooterSubsystem;
 
@@ -15,9 +14,7 @@ public class AutoShootCommandTest {
 
     @Before
     public void setup() {
-        RobotState robotState = mock(RobotState.class);
-        when(robotState.isDisabled()).thenReturn(false);
-        scheduler = new CommandScheduler(robotState) {};
+        scheduler = CommandScheduler.getInstance();
     }
 
     @After
@@ -26,15 +23,16 @@ public class AutoShootCommandTest {
     }
 
     @Test
-    public void testShoot() {
+    public void testShoot() throws InterruptedException {
         // Arrange
         ShooterSubsystem shooter = mock(ShooterSubsystem.class);
         AutoShootCommand command = new AutoShootCommand(shooter);
 
         // Act
         scheduler.schedule(command);
-        while (scheduler.getScheduleSize() > 0) {
+        for (int i=0; i<50; i++) {
             scheduler.run();
+            Thread.sleep(20);
         }
 
         // Assert
@@ -42,6 +40,5 @@ public class AutoShootCommandTest {
         verify(shooter, times(1)).fire();
         verify(shooter).setSpeed(1.0);
         verify(shooter).setSpeed(0.0);
-        assertEquals(0, scheduler.getScheduleSize());
     }
 }

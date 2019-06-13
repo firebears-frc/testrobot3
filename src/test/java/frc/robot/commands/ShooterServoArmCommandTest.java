@@ -5,7 +5,6 @@ import static org.mockito.Mockito.*;
 import org.junit.*;
 
 import edu.wpi.first.wpilibj.experimental.command.CommandScheduler;
-import edu.wpi.first.wpilibj.experimental.RobotState;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShooterServoArmCommandTest {
@@ -14,9 +13,7 @@ public class ShooterServoArmCommandTest {
 
     @Before
     public void setup() {
-        RobotState robotState = mock(RobotState.class);
-        when(robotState.isDisabled()).thenReturn(false);
-        scheduler = new CommandScheduler(robotState) {};
+        scheduler = CommandScheduler.getInstance();
     }
 
     @After
@@ -36,7 +33,6 @@ public class ShooterServoArmCommandTest {
 
         // Assert
         verify(shooter).retract();
-        assertEquals(0, scheduler.getScheduleSize());
     }
 
     @Test
@@ -51,6 +47,5 @@ public class ShooterServoArmCommandTest {
 
         // Assert
         verify(shooter).fire();
-        assertEquals(0, scheduler.getScheduleSize());
     }
 }
