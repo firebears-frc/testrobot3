@@ -30,7 +30,7 @@ public class AutoShootCommandTest {
 
         // Act
         scheduler.schedule(command);
-        for (int i=0; i<50; i++) {
+        for (int i=0; i<100; i++) {
             scheduler.run();
             Thread.sleep(20);
         }

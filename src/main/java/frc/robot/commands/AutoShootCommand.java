@@ -1,9 +1,7 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.experimental.command.PrintCommand;
-import edu.wpi.first.wpilibj.experimental.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj.experimental.command.WaitCommand;
-import frc.robot.subsystems.ShooterSubsystem;
+import edu.wpi.first.wpilibj.experimental.command.*;
+import frc.robot.subsystems.*;
 
 public class AutoShootCommand extends SequentialCommandGroup {
     public AutoShootCommand(ShooterSubsystem shooter) {
@@ -11,8 +9,9 @@ public class AutoShootCommand extends SequentialCommandGroup {
                 new PrintCommand("BEGIN: AutoShootCommand"),
                 new ShooterServoArmCommand(false, shooter),
                 new ShooterSetSpeedCommand(1.0, shooter),
-                new WaitCommand(0.25),
+                new WaitCommand(0.5),
                 new ShooterServoArmCommand(true, shooter),
+                new WaitCommand(0.5),
                 new ShooterSetSpeedCommand(0.0, shooter),
                 new ShooterServoArmCommand(false, shooter),
                 new PrintCommand("END: AutoShootCommand")

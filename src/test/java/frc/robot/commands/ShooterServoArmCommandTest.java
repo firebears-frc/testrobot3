@@ -1,11 +1,11 @@
 package frc.robot.commands;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import edu.wpi.first.wpilibj.experimental.command.*;
+import frc.robot.subsystems.*;
 import org.junit.*;
 
-import edu.wpi.first.wpilibj.experimental.command.CommandScheduler;
-import frc.robot.subsystems.ShooterSubsystem;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class ShooterServoArmCommandTest {
 

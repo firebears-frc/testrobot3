@@ -1,7 +1,7 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.experimental.command.SendableCommandBase;
-import frc.robot.subsystems.ShooterSubsystem;
+import edu.wpi.first.wpilibj.experimental.command.*;
+import frc.robot.subsystems.*;
 
 public class ShooterServoArmCommand extends SendableCommandBase {
 
